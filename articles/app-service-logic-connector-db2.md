@@ -283,20 +283,20 @@ App Service supports a Hybrid Configuration to connect securely to your on-premi
 
 See [Using the Hybrid Connection Manager](https://azure.microsoft.com/en-us/documentation/articles/app-service-logic-hybrid-connection-manager/).
 <!--Image references-->
-[1]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/ApiApp_Db2Connector_Create.jpg
-[2]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_NewOrdersDb2_Create.jpg
-[3]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_NewOrdersDb2_TriggersActions.jpg
-[4]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_NewOrdersDb2_Outputs.jpg
-[5]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_NewOrdersBulkDb2_Create.jpg
-[6]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_NewOrdersBulkDb2_TriggersActions.jpg
-[7]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_NewOrdersBulkDb2_Inputs.jpg
-[8]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_NewOrdersBulkDb2_Outputs.jpg
-[9]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_UpdateOrdersDb2_Create.jpg
-[10]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_UpdateOrdersDb2_TriggersActions.jpg
-[11]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_UpdateOrdersDb2_Outputs.jpg
-[12]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_RemoveOrdersDb2_Create.jpg
-[13]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_RemoveOrdersDb2_TriggersActions.jpg
-[14]: ./media/AppSeviceApiApp_ConnectorDb2_LogicApp/LogicApp_RemoveOrdersDb2_Outputs.jpg
+[1]: ./media/app-service-logic-connector-db2/ApiApp_Db2Connector_Create.jpg
+[2]: ./media/app-service-logic-connector-db2/LogicApp_NewOrdersDb2_Create.jpg
+[3]: ./media/app-service-logic-connector-db2/LogicApp_NewOrdersDb2_TriggersActions.jpg
+[4]: ./media/app-service-logic-connector-db2/LogicApp_NewOrdersDb2_Outputs.jpg
+[5]: ./media/app-service-logic-connector-db2/LogicApp_NewOrdersBulkDb2_Create.jpg
+[6]: ./media/app-service-logic-connector-db2/LogicApp_NewOrdersBulkDb2_TriggersActions.jpg
+[7]: ./media/app-service-logic-connector-db2/LogicApp_NewOrdersBulkDb2_Inputs.jpg
+[8]: ./media/app-service-logic-connector-db2/LogicApp_NewOrdersBulkDb2_Outputs.jpg
+[9]: ./media/app-service-logic-connector-db2/LogicApp_UpdateOrdersDb2_Create.jpg
+[10]: ./media/app-service-logic-connector-db2/LogicApp_UpdateOrdersDb2_TriggersActions.jpg
+[11]: ./media/app-service-logic-connector-db2/LogicApp_UpdateOrdersDb2_Outputs.jpg
+[12]: ./media/app-service-logic-connector-db2/LogicApp_RemoveOrdersDb2_Create.jpg
+[13]: ./media/app-service-logic-connector-db2/LogicApp_RemoveOrdersDb2_TriggersActions.jpg
+[14]: ./media/app-service-logic-connector-db2/LogicApp_RemoveOrdersDb2_Outputs.jpg
 
 
 
