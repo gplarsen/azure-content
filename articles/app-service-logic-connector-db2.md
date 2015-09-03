@@ -2,8 +2,8 @@
    pageTitle="Using the Microsoft API App Connector for DB2 in a Microsoft Azure App Service Logic App"
    description="How to use the DB2 Connector with Logic App triggers and actions"   services="app-service\logic"
    documentationCenter=".net,nodejs,java"
-   authors="plarsen"
-   manager="bills"
+   authors="gplarsen"
+   manager=""
    editor=""/>
 
 <tags
@@ -13,7 +13,7 @@
    ms.tgt_pltfrm="na"
    ms.workload="integration"
    ms.date="07/20/2015"
-   ms.author="plarsen"/>
+   ms.author="gplarsen"/>
 
 
 # Microsoft DB2 Connector #
@@ -76,8 +76,8 @@ You can create a new instance of a DB2 Connector API app from within the Azure M
 4. Type a list of **Tables**, for example, **NEWORDERS**.
 5. Type a list of **Procedures**, for example, **SPORDERID**.
 6. Optionally, click **true** to define an **OnPremise** connection for use with the Azure Service Proxy Relay, and then type a **Service Bus Connection String**. 
-7. Type a **Data Available Query** for use with a Logic App trigger, for example, type **SELECT COUNT(*) FROM NEWORDERS WHERE SHIPDATE IS NULL**.
-8. Type a **Poll Data Query** for use with a Logic App trigger, for example, type **SELECT * FROM NEWORDERS WHERE SHIPDATE IS NULL FOR UPDATE**.
+7. Type a **Data Available Query** for use with a Logic App trigger, for example, type **SELECT COUNT(\*) FROM NEWORDERS WHERE SHIPDATE IS NULL**.
+8. Type a **Poll Data Query** for use with a Logic App trigger, for example, type **SELECT \* FROM NEWORDERS WHERE SHIPDATE IS NULL FOR UPDATE**.
 9. Type a **Poll Alter Statement** for use with a Logic App trigger, for example, type **UPDATE NEWORDERS SET SHIPDATE = CURRENT DATE WHERE CURRENT OF &lt;CURSOR&gt;**.
 10. Click **OK**. Select or define values for the other settings (e.g. service plan, resource group). The settings should look as follows. Click **Create**. <br/>
 ![][1]
@@ -126,27 +126,19 @@ You can create a new Logic app from within the Azure Marketplace, and then use t
 2. In the **Create logic app** blade, type a **Name**, for example **NewOrdersDb2**.
 3. Select or define values for the other settings (e.g. service plan, resource group).
 4. The settings should look as follows. Click **Create**. <p/><br/>![][2]
-5. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **Recurrence**.
-6. On the Logic app design surface, click the **Recurrence** item, set a **Frequency** and **Interval**, for example **Days** and **1**, and then click the **checkmark** to save the recurrence item settings.
-7. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
-8. On the Logic app design surface, click the **DB2 Connector** action item, click the ellipses (**...**) to expand the operations list, and then click **Insert into NEWORDERS**.
-9. On the **DB2 Connector** action item, click the ellipses (**...**), and then scroll to type values for all INSERT command column parameters. For example, type these values. 
-    
-    ITEMS: 2
-    AMOUNT: 46.00
-    CUSTID: 10081
-    SHIPNAME: Trails Head Gourmet Provisioners
-    SHIPADDR: 722 DaVinci Blvd.
-    SHIPCITY: Kirkland
-    SHIPREG: WA
-    SHIPZIP: 98034
-	SHIPCTRY: USA
-
-10. Click the **checkmark** to save the action settings, and then click **Save**. The settings should look as follows. <p/><br/>![][3]
-11. Click to close the **Triggers and actions** blade, and then click to close the **Settings** blade.
-12. In the **All runs** list under **Operations**, click the first-listed item (most recent run).
-13. In the **Logic app run** blade, click the **ACTION** item.
-14. In the **Logic app action** blade, click the **OUTPUTS LINK**. The outputs should look as follows. <p/><br/>![][4]
+5. In the **Triggers and actions** blade, in the **Logic App Templates** list, click **Create from Scratch**.
+6. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **Recurrence**.
+7. On the Logic app design surface, click the **Recurrence** item, set a **Frequency** and **Interval**, for example **Days** and **1**, and then click the **checkmark** to save the recurrence item settings.
+8. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
+9. On the Logic app design surface, click the **DB2 Connector** action item, click the ellipses (**...**) to expand the operations list, and then click **Insert into NEWORDERS**.
+10. On the **DB2 Connector** action item, click the ellipses (**...**), and then scroll to type values for all INSERT command column parameters. For example, type these values (CUSTID: 10042; SHIPNAME: Lazy K Kountry Store; SHIPADDR: 12 Orchestra Terrace; SHIPCITY: Walla Walla; SHIPREG: WA; SHIPZIP: 99362).  
+11. Click the **checkmark** to save the action settings, and then click **Save**. The settings should look as follows. <p/><br/>![][3]
+12. Click to close the **Triggers and actions** blade, and then click to close the **Settings** blade.
+13. In the **All runs** list under **Operations**, click the first-listed item (most recent run).
+14. In the **Logic app run** blade, click the **ACTION** item.
+15. In the **Logic app action** blade, click the **OUTPUTS LINK**. The outputs should look as follows. <p/><br/>![][4]
+  
+**Note:** DB2 Connector defines EntitySet members with attributes, including whether the member corresponds to a DB2 column with a default or generated columns (e.g. identity). Logic app displays a red asterisk next to the EntitySet member ID name, to denote DB2 columns that require values. You should not enter a value for the ORDID member, which corresponds to DB2 identity column. You may enter values for other optional members (ITEMS, ORDDATE, REQDATE, SHIPID, FREIGHT, SHIPCTRY), which correspond to DB2 columns with default values.
 
 
 ## Create Logic App using DB2 Connector as Action to Write Bulk Data ##
@@ -156,11 +148,12 @@ You can create a new Logic app from within the Azure Marketplace, and then use t
 2. In the **Create logic app** blade, type a **Name**, for example **NewOrdersBulkDb2**.
 3. Select or define values for the other settings (e.g. service plan, resource group).
 4. The settings should look as follows. Click **Create**. <p/><br/>![][5]
-5. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **Recurrence**.
-6. On the Logic app design surface, click the **Recurrence** item, set a **Frequency** and **Interval**, for example **Days** and **1**, and then click the **checkmark** to save the recurrence item settings.
-7. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
-8. On the Logic app design surface, click the **DB2 Connector** action item, click the ellipses (**...**) to expand the operations list, and then click **Bulk Insert into NEWORDERS**.
-9. On the **DB2 Connector** action item, type the **rows** value as an array. For example, type the following array value.
+5. In the **Triggers and actions** blade, in the **Logic App Templates** list, click **Create from Scratch**.
+6. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **Recurrence**.
+7. On the Logic app design surface, click the **Recurrence** item, set a **Frequency** and **Interval**, for example **Days** and **1**, and then click the **checkmark** to save the recurrence item settings.
+8. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
+9. On the Logic app design surface, click the **DB2 Connector** action item, click the ellipses (**...**) to expand the operations list, and then click **Bulk Insert into NEWORDERS**.
+10. On the **DB2 Connector** action item, type the **rows** value as an array. For example, type the following array value.
 
     [{"ITEMS":2,"AMOUNT":46.00,"CUSTID":10081,"SHIPNAME":"Trail's Head Gourmet Provisioners","SHIPADDR":"722 DaVinci Blvd.","SHIPCITY":"Kirkland","SHIPREG":"WA","SHIPZIP":"98034"},{"ITEMS":3,"AMOUNT":46.00,"CUSTID":10088,"SHIPNAME":"White Clover Markets","SHIPADDR":"305 14th Ave. S. Suite 3B","SHIPCITY":"Seattle","SHIPREG":"WA","SHIPZIP":"98128","SHIPCTRY":"USA"}]
 
@@ -170,12 +163,12 @@ You can create a new Logic app from within the Azure Marketplace, and then use t
 
 **Note:** By specifying "today" and "tomorrow", DB2 Connector will generate "CURRENT DATE" and "CURRENT DATE + 1 DAY" functions (e.g. REQDATE). 
 
-10. Click the **checkmark** to save the action settings, and then click **Save**. The settings should look as follows. <p/><br/>![][6]
-11. Click to close the **Triggers and actions** blade, and then click to close the **Settings** blade.
-12. In the **All runs** list under **Operations**, click the first-listed item (most recent run).
-13. In the **Logic app run** blade, click the **ACTION** item.
-14. In the **Logic app action** blade, click the **INPUTS LINK**. The outputs should look as follows. <p/><br/>![][7]
-15. In the **Logic app action** blade, click the **OUTPUTS LINK**. The outputs should look as follows. <p/><br/>![][8]
+11. Click the **checkmark** to save the action settings, and then click **Save**. The settings should look as follows. <p/><br/>![][6]
+12. Click to close the **Triggers and actions** blade, and then click to close the **Settings** blade.
+13. In the **All runs** list under **Operations**, click the first-listed item (most recent run).
+14. In the **Logic app run** blade, click the **ACTION** item.
+15. In the **Logic app action** blade, click the **INPUTS LINK**. The outputs should look as follows. <p/><br/>![][7]
+16. In the **Logic app action** blade, click the **OUTPUTS LINK**. The outputs should look as follows. <p/><br/>![][8]
 
 
 ## Create Logic App using DB2 Connector as Trigger to Alter Data and Action to Read Data##
@@ -188,16 +181,17 @@ Following the trigger, you can use the DB2 Connector as action to read customer 
 3. Select or define values for the other settings (e.g. service plan, resource group).
 4. The settings should look as follows. Click **Create**. <p/><br/>![][9]
 5. In the **Settings** blade, click **Triggers and actions**.
-6. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
-7. On the Logic app design surface, click the **DB2 Connector** trigger item, click **Poll Data**, set a **Frequency** and **Interval**, for example **Days** and **1**, and then click the **checkmark** to save the trigger item settings. 
-8. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
-9. On the Logic app design surface, click the **DB2 Connector** action item, click the ellipses (**...**) to expand the operations list, and then click **Select from NEWORDERS**.
-10. On the **DB2 Connector** action item, type **ORDID ge 90000** for an **expression that identifies a subset of entries**.
-11. Click the **checkmark** to save the action settings, and then click **Save**. The settings should look as follows. <p/><br/>![][10]
-12. Click to close the **Triggers and actions** blade, and then click to close the **Settings** blade.
-13. In the **All runs** list under **Operations**, click the first-listed item (most recent run).
-14. In the **Logic app run** blade, click the **ACTION** item.
-15. In the **Logic app action** blade, click the **OUTPUTS LINK**. The outputs should look as follows. <p/><br/>![][11]
+6. In the **Triggers and actions** blade, in the **Logic App Templates** list, click **Create from Scratch**.
+7. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
+8. On the Logic app design surface, click the **DB2 Connector** trigger item, click **Poll Data**, set a **Frequency** and **Interval**, for example **Days** and **1**, and then click the **checkmark** to save the trigger item settings. 
+9. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
+10. On the Logic app design surface, click the **DB2 Connector** action item, click the ellipses (**...**) to expand the operations list, and then click **Select from NEWORDERS**.
+11. On the **DB2 Connector** action item, type **ORDID ge 90000** for an **expression that identifies a subset of entries**.
+12. Click the **checkmark** to save the action settings, and then click **Save**. The settings should look as follows. <p/><br/>![][10]
+13. Click to close the **Triggers and actions** blade, and then click to close the **Settings** blade.
+14. In the **All runs** list under **Operations**, click the first-listed item (most recent run).
+15. In the **Logic app run** blade, click the **ACTION** item.
+16. In the **Logic app action** blade, click the **OUTPUTS LINK**. The outputs should look as follows. <p/><br/>![][11]
 
 
 ## Create Logic App using DB2 Connector to Remove Data ##
@@ -207,16 +201,17 @@ You can create a new Logic app from within the Azure Marketplace, and then use t
 2. In the **Create logic app** blade, type a **Name**, for example **RemoveOrdersDb2**.
 3. Select or define values for the other settings (e.g. service plan, resource group).
 4. The settings should look as follows. Click **Create**. <p/><br/>![][12]
-5. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **Recurrence**.
-6. On the Logic app design surface, click the **Recurrence** item, set a **Frequency** and **Interval**, for example **Days** and **1**, and then click the **checkmark** to save the recurrence item settings.
-7. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
-8. On the Logic app design surface, click the **DB2 Connector** action item, click the ellipses (**...**) to expand the operations list, and then click **Conditional delete from NEWORDERS**.
-9. On the **DB2 Connector** action item, type **ORDID ge 90000** for an **expression that identifies a subset of entries**.
-10. Click the **checkmark** to save the action settings, and then click **Save**. The settings should look as follows. <p/><br/>![][13]
-11. Click to close the **Triggers and actions** blade, and then click to close the **Settings** blade.
-12. In the **All runs** list under **Operations**, click the first-listed item (most recent run).
-13. In the **Logic app run** blade, click the **ACTION** item.
-14. In the **Logic app action** blade, click the **OUTPUTS LINK**. The outputs should look as follows. <p/><br/>![][14]
+5. In the **Triggers and actions** blade, in the **Logic App Templates** list, click **Create from Scratch**.
+6. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **Recurrence**.
+7. On the Logic app design surface, click the **Recurrence** item, set a **Frequency** and **Interval**, for example **Days** and **1**, and then click the **checkmark** to save the recurrence item settings.
+8. In the **Triggers and actions** blade, in the **API Apps** panel, within the resource group, click **DB2 Connector**.
+9. On the Logic app design surface, click the **DB2 Connector** action item, click the ellipses (**...**) to expand the operations list, and then click **Conditional delete from NEWORDERS**.
+10. On the **DB2 Connector** action item, type **ORDID ge 90000** for an **expression that identifies a subset of entries**.
+11. Click the **checkmark** to save the action settings, and then click **Save**. The settings should look as follows. <p/><br/>![][13]
+12. Click to close the **Triggers and actions** blade, and then click to close the **Settings** blade.
+13. In the **All runs** list under **Operations**, click the first-listed item (most recent run).
+14. In the **Logic app run** blade, click the **ACTION** item.
+15. In the **Logic app action** blade, click the **OUTPUTS LINK**. The outputs should look as follows. <p/><br/>![][14]
 
 
 ## DB2 Connector Samples ##
@@ -226,25 +221,26 @@ DB2 Connector with Logic App walk-through exercises utilize the following table 
 ### Create Table ###
 You can create the sample NEWORDERS table using the following DDL statement.
 
-    CREATE TABLE NEWORDERS (
-    		ORDID INT NOT NULL GENERATED BY DEFAULT AS IDENTITY (START WITH 10248, INCREMENT BY 1), 
-    		ITEMS SMALLINT DEFAULT 1, 
-    		AMOUNT DECIMAL (9, 2) NOT NULL, 
-    		CUSTID INT NOT NULL, 
-    		ORDDATE DATE NOT NULL DEFAULT, 
-    		REQDATE DATE NOT NULL DEFAULT, 
-    		SHIPDATE DATE, 
-    		SHIPID INT NOT NULL DEFAULT 10000, 
-    		FREIGHT DECIMAL (9,2) NOT NULL DEFAULT 0.00, 
-    		SHIPNAME CHAR (40) NOT NULL,
-    		SHIPADDR CHAR (60) NOT NULL,
-    		SHIPCITY CHAR (20) NOT NULL,
-    		SHIPREG CHAR (15) NOT NULL,
-    		SHIPZIP CHAR (10) DEFAULT,
-    		SHIPCTRY CHAR (15) NOT NULL DEFAULT 'USA',
-    		PRIMARY KEY(ORDID))
+	CREATE TABLE ORDERS (
+		ORDID INT NOT NULL GENERATED BY DEFAULT AS IDENTITY (START WITH 10000, INCREMENT BY 1) , 
+		CUSTID INT NOT NULL , 
+		EMPID INT NOT NULL DEFAULT 10000 , 
+		ORDDATE DATE NOT NULL DEFAULT CURRENT DATE , 
+		REQDATE DATE DEFAULT CURRENT DATE , 
+		SHIPDATE DATE , 
+		SHIPID INT NOT NULL DEFAULT 10000, 
+		FREIGHT DECIMAL (9,2) NOT NULL DEFAULT 0.00 , 
+		SHIPNAME CHAR (40) NOT NULL , 
+		SHIPADDR CHAR (60) NOT NULL , 
+		SHIPCITY CHAR (20) NOT NULL , 
+		SHIPREG CHAR (15) NOT NULL , 
+		SHIPZIP CHAR (10) NOT NULL , 
+		SHIPCTRY CHAR (15) NOT NULL DEFAULT 'USA' , 
+		PRIMARY KEY(ORDID)
+		)
 
-    CREATE UNIQUE INDEX XNEWORDID ON NEWORDERS (ORDID ASC)
+	CREATE UNIQUE INDEX XORDID ON ORDERS (ORDID ASC)
+
 
 ### Create Procedure ###
 You can create the sample NEWORDERS table using the following DDL statement.
